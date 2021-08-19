@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>hey there</h1>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-remote-config.js"></script>
+
+    <!-- Include only the services you use, for example auth and database below. -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/${FIREBASE_VERSION}/firebase-auth.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/${FIREBASE_VERSION}/firebase-database.js"></script> -->
+
+    <script>
+      const app = firebase.initializeApp({
+        apiKey: "AIzaSyCZZHf8Jzl_8W-FEdGRAXbnz8lpsipi0yI",
+        authDomain: "node-firebase-46440.firebaseapp.com",
+        projectId: "node-firebase-46440",
+        storageBucket: "node-firebase-46440.appspot.com",
+        messagingSenderId: "277816066776",
+        appId: "1:277816066776:web:eda5b6dbb807320bd2cdad",
+        measurementId: "G-E9TKXNG9MG",
+      });
+      const remoteConfig = firebase.remoteConfig();
+
+      remoteConfig.settings.minimumFetchIntervalMillis = 36000;
+
+      remoteConfig.defaultConfig = {
+        welcome_message: "Welcome to your config.",
+      };
+
+      // const val = remoteConfig.getValue("welcome_messsage");
+      // console.log(val);
+
+      remoteConfig
+        .fetchAndActivate()
+        .then(() => {
+          const superAwesomeFeature = remoteConfig.getValue("welcome_message");
+
+          console.log(superAwesomeFeature);
+        })
+        .catch((err) => {
+          console.log(`[🆘] Error in Paradise ! `);
+        });
+
+      // ...
+    </script>
+  </body>
+</html>
